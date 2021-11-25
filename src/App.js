@@ -27,9 +27,12 @@ function MyComponent() {
     ]);
   }, []);
 
+  const sum = numbers.reduce((a, v) => a + v, 0);
+
   return <div>
     <div>Numbers: {JSON.stringify(numbers)}</div>
     <button onClick={addOne}>Add one</button>
+    <div>sum: {sum}</div>
   </div>
 }
 
