@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 //import './App.css';
 
 /*
@@ -20,9 +20,12 @@ function MyComponent() {
       });
   }, []);
 
-  const addOne = () => {
-    setNumbers([...numbers, numbers.length + 1]);
-  }
+  const addOne = useCallback(() => {
+    setNumbers((currentNumbers) => [
+      ...currentNumbers,
+      currentNumbers.length + 1,
+    ]);
+  }, []);
 
   return <div>
     <div>Numbers: {JSON.stringify(numbers)}</div>
