@@ -1,16 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 //import './App.css';
 
+/*
+Rules
+Always use the setter for useState
+Always put a dependancy array on useEffect, useCallback, useMemo
+To run useEffect only once use an empty array
+Don't depend on data you set
+*/
 
 function MyComponent() {
-  const numbers = useState([]);
+  const [numbers, setNumbers] = useState([]);
 
-  fetch("/numbers.json")
+  useEffect(() => {
+   fetch("/numbers.json")
     .then((resp) => resp.json())
-    .then((data) => (numbers[0] = data));
+    .then((data) => {
+      setNumbers(data);
+    });
+  }, []);
 
   return <div>
-    <div>Numbers: {JSON.stringify(numbers[0])}</div>
+    <div>Numbers: {JSON.stringify(numbers)}</div>
   </div>
 }
 
