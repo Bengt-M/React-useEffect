@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 //import './App.css';
 
 /*
@@ -7,6 +7,7 @@ Always use the setter for useState
 Always put a dependancy array on useEffect, useCallback, useMemo
 To run useEffect only once use an empty array
 Don't depend on data you set
+Always add all the state you read from to the dependancy array
 */
 
 function MyComponent() {
@@ -27,7 +28,7 @@ function MyComponent() {
     ]);
   }, []);
 
-  const sum = numbers.reduce((a, v) => a + v, 0);
+  const sum = useMemo(()=>numbers.reduce((a, v) => a + v, 0), [numbers]);
 
   return <div>
     <div>Numbers: {JSON.stringify(numbers)}</div>
